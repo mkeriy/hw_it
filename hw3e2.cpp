@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 
-void merge_sort(std::vector <double> & v);
-void merge(const std::vector <double> & v1, const std::vector <double> & v2, std::vector <double> & v);
+void merge_sort(std::vector <double> & v, int left , int right);
+void merge(std::vector <double> & v, int left, int right);
 
 int main() {
     
@@ -21,11 +21,11 @@ int main() {
     
     }
 
-    merge_sort(sequence);
+    merge_sort(sequence, 0, sequence.size()-1);
 
 
     std::cout << "Sorted sequence." << std::endl;
-    for (double & item : sequence)
+    for (double item : sequence)
     {
         std::cout << item << ' ';
     }
@@ -36,80 +36,54 @@ int main() {
 }
 
 
-void merge_sort(std::vector <double> & v){
-    std::vector <double> l;
-    std::vector <double> r;
-    if(v.size() <= 1)
+
+void merge_sort(std::vector <double> & v, int left , int right){
+
+    if  (left < right)
+    {
+        merge_sort(v, left,  left + (right - left)/2); 
+        merge_sort(v, left + (right - left)/2 + 1, right); 
+
+        merge(v, left, right);
+    }
+    else    
     {
         return;
     }
-    else
-    {
-        
-        for(int i = 0; i < v.size()/2; ++i)
-        {
-            l.push_back(v[i]);
-        }
-
-        for(int i = v.size()/2; i < v.size(); ++i)
-        {
-            r.push_back(v[i]);
-        } 
-    }
-
-    
-    merge_sort(l);
-    merge_sort(r);
-   
-    merge(l, r, v);
-
 }
 
-void merge(const std::vector <double> & v1, const std::vector <double> & v2, std::vector <double> & v){
-   
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    
+void merge(std::vector <double> & v, int left, int right)
+{
 
-    while(i < v1.size() && j < v2.size() && k < v.size())
+    int middle =  left + (right - left)/2;
+    int first = left;
+    int final = middle + 1; 
+ 
+    
+    std::vector <double> v1(v.size());
+    
+    
+    for(int j = left; j<=right; j++)
     {
-        if(v1[i] <= v2[j])
+        if ( (first <= middle) && ((final>right) || (v[first]<v[final])))
         {
-            v[k] = v1[i];
-            ++i;
-            
+            v1[j]=v[first];
+            ++first;
         }
         else
         {
-            v[k] = v2[j];
-            ++j;
-            
+            v1[j]=v[final];
+            ++final;
         }
-        ++k;
-    
     }
 
-   if (i < v1.size()) 
-    {
-		for (; i < v1.size() && k < v.size(); ++i, ++k)
-        {
-			v[k] = v1[i];
-        }    
-	}
-
-	if (j < v2.size()) 
-    {
-		for (; j < v2.size() && k < v.size(); ++j, ++k)
-        {
-			v[k] = v2[j];
-        }    
-	}
-    
-    
-
-    
+    for (int j = left; j<=right; j++) 
+    {    
+        v[j]=v1[j];
+    }    
 }
+
+
 
 
 

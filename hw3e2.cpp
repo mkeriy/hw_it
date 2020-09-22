@@ -57,29 +57,29 @@ void merge(std::vector <double> & v, int left, int right)
 
     int middle =  left + (right - left)/2;
     int first = left;
-    int final = middle + 1; 
+    int last = middle + 1; 
  
     
     std::vector <double> v1(v.size());
     
     
-    for(int j = left; j<=right; j++)
+    for(int j = left; j <= right; j++)
     {
-        if ( (first <= middle) && ((final>right) || (v[first]<v[final])))
+        if ( (first <= middle) && ((last > right) || (v[first] < v[last])))
         {
-            v1[j]=v[first];
+            v1[j] = v[first];
             ++first;
         }
         else
         {
-            v1[j]=v[final];
-            ++final;
+            v1[j] = v[last];
+            ++last;
         }
     }
 
-    for (int j = left; j<=right; j++) 
+    for (int j = left; j <= right; j++) 
     {    
-        v[j]=v1[j];
+        v[j] = v1[j];
     }    
 }
 

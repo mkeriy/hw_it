@@ -24,6 +24,7 @@ int main(){
     std::cout << "Select sort." << std::endl;
     std::cout << "Enter 1 if from smallest to largest" << std::endl;
     std::cout << "Enter 2 if from largest to smallest" << std::endl;
+    std::cout << "Enter 3 if deduce both sorts" << std::endl;
     std::cout << "Enter a number: ";
     std::cin >> n;
 
@@ -48,11 +49,33 @@ int main(){
     
             }
             break;
+        case 3:
+                std::sort (sequence.begin(), sequence.end(), [](double i, double j){ return i < j;});
+            std::cout << "Sorted sequence." << std::endl;
+            for(double & item : sequence)
+            {
+
+                std::cout << item << ' ';
+    
+            }
+            
+            std::cout << std::endl;
+
+            std::sort (sequence.begin(), sequence.end(), [](double i, double j){ return i > j;});
+            std::cout << "Sorted sequence." << std::endl;
+            for(double & item : sequence)
+            {
+
+                std::cout << item << ' ';
+    
+            }
+            break;
+        
         default:
             std::cout << "Wrong number. Try again.";
             break;
 
     }
 
-
+    return 0;
 }

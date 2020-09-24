@@ -1,44 +1,30 @@
 #include <iostream>
 
 
+
 //первый случай
-int f1(int a, int b){
+void f1(int a, double b = 0.0){}
 
-    std::cout << a + b << std::endl;
-
-}
-
-double f1(double a, double b){
-
-    std::cout << a + b << std::endl;
-
-}
+void f1(int a){}
 
 //второй случай
-int f2(int a, int d = 1){
+void f2(double * a, int d = 2){}
 
-    std::cout << a / d << std::endl;
 
-}
+
+void f2(int *b, double a = 0){}
 
 //третий случай
-void f3(char k){
+void f3(int k){}
 
-    std::cout << 2 * k << std::endl;    
+void f3(double k){}
 
-}
+int main(){
+   
 
-void f3(unsigned char k){
-
-    std::cout << k - 1 << std::endl;
-
-}
-
-int main() {
-
-    f1(1, 1.0);
-    f2(2);
-    f3(19);
+    f1(1);
+    f2(nullptr);
+    f3(0U);
 
 
 

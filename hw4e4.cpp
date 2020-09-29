@@ -18,37 +18,34 @@ enum class month{
 
 };
 
-void daysMonth(month mth, int n){
+void daysMonth(month mth, int year){
+    int n = 28;
+    if (year % 4 == 0)
+    {
+       ++n;
+    }
 
     switch (mth)
     {
         case month::yan:
-            case month::march:
-                case month::may:
-                    case month::july:
-                        case month::aug:
-                            case month::oct:
-                                 case month::dec:
-                                    std::cout << "31 days" << std::endl;
+        case month::march:
+        case month::may:
+        case month::july:
+        case month::aug:
+        case month::oct:
+        case month::dec:
+            std::cout << "31 days" << std::endl;
             break;
-            break;
-            break;
-            break;
-            break;
-            break;
-            break;
+            
         case month::feb:
             std::cout << "In February " << n << " days" << std::endl;
             break;
         
         case month::april:
-            case month::june:
-                case month::sept:
-                    case month::nov:
-                        std::cout << "30 days" << std::endl;
-            break;
-            break;
-            break;
+        case month::june:
+        case month::sept:
+        case month::nov:
+            std::cout << "30 days" << std::endl;
             break;
         default:
             std::cout << "Wrong number of month. Try again..." << std::endl;
@@ -63,7 +60,7 @@ int main(){
     int year;
     month mth;
     int m;
-    int n = 28;
+
 
     std::cout << "Enter the year starting: ";
     std::cin >> year;
@@ -84,14 +81,10 @@ int main(){
     std::cout << "Enter a number of month: ";
     std::cin >> m;
     std::cout << std::endl; 
-    mth = (month) m;
     
-   if (year % 4 == 0)
-    {
-       ++n;
-    }
-
-    daysMonth(mth, n); 
+    mth = static_cast <month> (m);
+    
+    daysMonth(mth, year); 
 
 
     return 0;

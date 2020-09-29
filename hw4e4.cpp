@@ -73,7 +73,7 @@ int main(){
     int m;
     int n = 28;
 
-    std::cout << "Enter the year starting from 1900: ";
+    std::cout << "Enter the year starting: ";
     std::cin >> year;
 
     std::cout << "Select the month in which you want to know the number of days." << std::endl;
@@ -94,7 +94,7 @@ int main(){
     std::cout << std::endl; 
     mth = (month) m;
     
-   if ((year - 1900) % 4 == 0)
+   if (year % 4 == 0)
    {
        ++n;
        daysMonth(mth, n);

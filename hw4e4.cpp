@@ -23,40 +23,32 @@ void daysMonth(month mth, int n){
     switch (mth)
     {
         case month::yan:
-            std::cout << "In Yanuary 31 days" << std::endl;
+            case month::march:
+                case month::may:
+                    case month::july:
+                        case month::aug:
+                            case month::oct:
+                                 case month::dec:
+                                    std::cout << "31 days" << std::endl;
+            break;
+            break;
+            break;
+            break;
+            break;
+            break;
             break;
         case month::feb:
             std::cout << "In February " << n << " days" << std::endl;
             break;
-        case month::march:
-            std::cout << "In March 31 days" << std::endl;
-            break;
+        
         case month::april:
-            std::cout << "In april 30 days" << std::endl;
+            case month::june:
+                case month::sept:
+                    case month::nov:
+                        std::cout << "30 days" << std::endl;
             break;
-        case month::may:
-            std::cout << "In may 31 days" << std::endl;
             break;
-        case month::june:
-            std::cout << "In June 30 days" << std::endl;
             break;
-        case month::july:
-            std::cout << "In July 31 days" << std::endl;
-            break;
-        case month::aug:
-            std::cout << "In August 31 days" << std::endl;
-            break;
-        case month::sept:
-            std::cout << "In September 30 days" << std::endl;
-            break;
-        case month::oct:
-            std::cout << "In October 31 days" << std::endl;
-            break;
-        case month::nov:
-            std::cout << "In November 30 days" << std::endl;
-            break;
-        case month::dec:
-            std::cout << "In December 31 days" << std::endl;
             break;
         default:
             std::cout << "Wrong number of month. Try again..." << std::endl;
@@ -95,15 +87,11 @@ int main(){
     mth = (month) m;
     
    if (year % 4 == 0)
-   {
+    {
        ++n;
-       daysMonth(mth, n);
-   }
-   else 
-   {
-       daysMonth(mth, n);
-   }
-     
+    }
+
+    daysMonth(mth, n); 
 
 
     return 0;

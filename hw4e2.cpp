@@ -33,26 +33,26 @@ struct Student{
 
     
 
-    void add_lesson(std::vector<Lesson> & v, const std::string j)
+    void add_lesson(std::vector<Lesson> & v, const std::string j, Lesson* a)
     {
-       Lesson * ptr = new Lesson;
+        
         for(auto & l: v)
         {
             if(j == l.less)
             {
-                ptr = &l;
-				lesson_ptr.push_back(ptr);
-				ptr->student_ptr.push_back(this);
+                a = &l;
+				lesson_ptr.push_back(a);
+				a->student_ptr.push_back(this);
             }
         }
-        delete ptr;
+        
     }
 
     void print_lessons() 
     {
 		for (auto & s : lesson_ptr) 
         {
-            std::cout << "fuck";
+            
 			std::cout << s->less;
 		}
     }
@@ -69,7 +69,7 @@ int main(){
 
     std::vector <Student> student;
     std::vector <Lesson> subject;
-
+    Lesson a;
     
 	Student s1("Ivanov");
     Student s2("Petrov");
@@ -83,10 +83,14 @@ int main(){
 	subject.push_back(c2);
 	subject.push_back(c3);
 
-	student[0].add_lesson(subject, "Math");
-	student[0].add_lesson(subject, "IT");
-    student[1].add_lesson(subject, "PE");
+	student[0].add_lesson(subject, "Math", &a);
+    
+	student[0].add_lesson(subject, "IT", &a);
+   
+    student[1].add_lesson(subject, "PE", &a);
+    
 	student[0].print_lessons();
+    std::cout << std::endl;
     student[1].print_lessons();
     
     

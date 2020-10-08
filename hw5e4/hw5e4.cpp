@@ -1,6 +1,7 @@
 #include <iostream>
 #include "h.hpp"
 
+int z;
 class B
 {
     int x;

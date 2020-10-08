@@ -1,5 +1,5 @@
 #pragma once
-
+int z;// оставить в одном файле int z;
 void f()
 {
 	return 0;

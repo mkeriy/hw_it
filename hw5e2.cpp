@@ -22,27 +22,24 @@ class Pressure
         return m_value;
     }
 
-    auto setter(double v)
+    auto setterBar(double v)
     {
-        m_value = v;
-        return m_value;
+        m_value = v * c_bar;
+        
     }
     
-    auto bar()
+   auto setterAtm(double v)
     {
-        m_value *= c_bar;
-        return m_value;    
+        m_value = v * c_atm;
+        
     }
-    auto atm()
+    auto setterMmHg(double v)
     {
-        m_value *= c_atm; 
-        return m_value;
-    } 
-    auto mmHg()
-    {
-        m_value *= c_mmhg;
-        return m_value;
+        m_value = v * c_mmhg;
+        
     }
+    
+    
 
     
     static constexpr double c_bar = 100000; 
@@ -64,13 +61,14 @@ enum class type
 int main()
 {
     Pressure m_value(0);
+    double a;
     int m_type;
     type t;
     
 
     std::cout << "This program can only convert values from bar, mmHg and atmospheres to Pascals" << std::endl;
     std::cout << "Enter the value" << std::endl;
-    std::cin >> m_value;
+    std::cin >> a;
     
 
    std::cout << "1 - bar \n" << "2 - atm \n" << "3 - mmHg\n" << std::endl;
@@ -81,13 +79,13 @@ int main()
     switch (t)
     {
         case type::bar:
-                m_value.setter(m_value.bar());
+                m_value.setterBar(a);
             break;
         case type::atm:
-                m_value.setter(m_value.atm());
+                m_value.setterAtm(a);
             break;
         case type::mmHg:
-                m_value.setter(m_value.mmHg());
+                m_value.setterMmHg(a);
             break;
         default:
             std::cout << "Wrong value of mesurement. Try again... " << std::endl;

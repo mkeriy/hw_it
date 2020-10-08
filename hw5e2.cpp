@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
 
+   static double c_bar = 100000; 
+    static double c_atm = 98066.5;
+    static double c_mmhg = 133.3224;1
+
 class Pressure
 {
     private:
@@ -28,9 +32,7 @@ class Pressure
         m_value *= c_mmhg;
     }
 
-    const double c_bar = 100000; 
-    const double c_atm = 98066.5;
-    const double c_mmhg = 133.3224;
+ 
 
     friend std::ostream & operator << (std::ostream & out, const Pressure & val);
     friend std::istream & operator >> (std::istream & in, Pressure & val);

@@ -1,15 +1,13 @@
 #include <iostream>
 #include <string>
 
-   static double c_bar = 100000; 
-    static double c_atm = 98066.5;
-    static double c_mmhg = 133.3224;1
+   
 
 class Pressure
 {
     private:
     double m_value;
-    
+   
 
     public:
     Pressure (double value):
@@ -32,7 +30,10 @@ class Pressure
         m_value *= c_mmhg;
     }
 
- 
+ static constexpr double c_bar = 100000; 
+    static constexpr double c_atm = 98066.5;
+    static constexpr double c_mmhg = 133.3224;
+
 
     friend std::ostream & operator << (std::ostream & out, const Pressure & val);
     friend std::istream & operator >> (std::istream & in, Pressure & val);
@@ -61,9 +62,17 @@ int main()
     {
         t = static_cast <type> (1);
     }
+    else
+    {
+          std::cout << "Wrong value of mesurement. Try again... " << std::endl;
+    }
     if (m_type == "atm")
     {
         t = static_cast <type> (2);
+    }
+    else
+    {
+          std::cout << "Wrong value of mesurement. Try again... " << std::endl;
     }
      if (m_type == "mmHg")
     {

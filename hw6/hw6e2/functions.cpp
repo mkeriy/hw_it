@@ -16,9 +16,9 @@ Fraction operator+(const Fraction &f1, int value)
 		return Fraction(f1.m_numerator+value*f1.m_deminator, f1.m_deminator);
 }
 
-Fraction operator+=(const Fraction & f1, const Fraction & f2)
+void Fraction::operator+=(const Fraction & f2)
 {
-	return Fraction(f1.m_numerator*f2.m_deminator + f2.m_numerator*f1.m_deminator, f1.m_deminator*f2.m_deminator);
+	*this = Fraction(m_numerator * f2.m_deminator + f2.m_numerator * m_deminator, m_deminator * f2.m_deminator);
 }
 
 Fraction operator-(const Fraction &f1, const Fraction &f2)
@@ -36,9 +36,9 @@ Fraction operator-(int value, const Fraction &f2)
 	return Fraction( value*f2.m_deminator + f2.m_numerator, f2.m_deminator);
 }
 
-Fraction operator-=(const Fraction & f1, const Fraction & f2)
+void Fraction::operator-=(const Fraction & f2)
 {
-	return Fraction(f1.m_numerator*f2.m_deminator - f2.m_numerator*f1.m_deminator, f1.m_deminator*f2.m_deminator);
+	*this = Fraction(m_numerator*f2.m_deminator - f2.m_numerator*m_deminator, m_deminator*f2.m_deminator);
 }
 Fraction operator*(const Fraction &f1, const Fraction &f2)
 {
@@ -55,9 +55,9 @@ Fraction operator*(int value, const Fraction &f2)
 	return Fraction(value*f2.m_numerator, f2.m_deminator);
 }
 
-Fraction operator*=(const Fraction & f1, const Fraction & f2)
+void Fraction::operator*=(const Fraction & f2)
 {
-	return Fraction(f1.m_numerator*f2.m_numerator, f1.m_deminator*f2.m_deminator);
+	*this = Fraction(m_numerator*f2.m_numerator, m_deminator*f2.m_deminator);
 }
 
 Fraction operator/(const Fraction & f1, const Fraction & f2)
@@ -75,9 +75,9 @@ Fraction operator/(int value, const Fraction & f2)
 	return Fraction(value*f2.m_deminator, f2.m_numerator);
 }
 
-Fraction operator/=(const Fraction & f1, const Fraction & f2)
+void Fraction::operator/=(const Fraction & f2)
 {
-	return Fraction(f1.m_numerator*f2.m_deminator, f1.m_deminator*f2.m_numerator);
+	*this = Fraction(m_numerator*f2.m_deminator, m_deminator*f2.m_numerator);
 }
 bool operator==(const Fraction & f1, const Fraction & f2)
 {

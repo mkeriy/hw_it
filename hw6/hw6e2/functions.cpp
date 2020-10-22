@@ -1,20 +1,16 @@
 #include <iostream>
+#include <algorithm>
+
 #include "Header.hpp"
 
 Fraction operator+(const Fraction &f1, const Fraction &f2)
 {
-	return Fraction(f1.m_numerator*f2.m_deminator + f2.m_numerator*f1.m_deminator, f1.m_deminator*f2.m_deminator);
+	Fraction result(f1);
+	result += f2;
+	result.reduction();
+	return result;
 }
 
-Fraction operator+(int value, const Fraction &f2)
-{
-	return Fraction(value*f2.m_deminator + f2.m_numerator, f2.m_deminator);
-}
-
-Fraction operator+(const Fraction &f1, int value)
-{
-		return Fraction(f1.m_numerator+value*f1.m_deminator, f1.m_deminator);
-}
 
 void Fraction::operator+=(const Fraction & f2)
 {
@@ -23,17 +19,10 @@ void Fraction::operator+=(const Fraction & f2)
 
 Fraction operator-(const Fraction &f1, const Fraction &f2)
 {
-	return Fraction(f1.m_numerator*f2.m_deminator - f2.m_numerator*f1.m_deminator, f1.m_deminator*f2.m_deminator);
-}
-
-Fraction operator-(const Fraction &f1, int value)
-{
-	return Fraction(f1.m_numerator - value*f1.m_deminator, f1.m_deminator);
-}
-
-Fraction operator-(int value, const Fraction &f2)
-{
-	return Fraction( value*f2.m_deminator + f2.m_numerator, f2.m_deminator);
+		Fraction result(f1);
+		result -= f2;
+		result.reduction();
+		return result;
 }
 
 void Fraction::operator-=(const Fraction & f2)
@@ -42,17 +31,10 @@ void Fraction::operator-=(const Fraction & f2)
 }
 Fraction operator*(const Fraction &f1, const Fraction &f2)
 {
-	return Fraction(f1.m_numerator*f2.m_numerator, f1.m_deminator*f2.m_deminator);
-}
-
-Fraction operator*(const Fraction &f1, int value)
-{
-	return Fraction(f1.m_numerator*value, f1.m_deminator);
-}
-
-Fraction operator*(int value, const Fraction &f2)
-{
-	return Fraction(value*f2.m_numerator, f2.m_deminator);
+		Fraction result(f1);
+		result *= f2;
+		result.reduction();
+		return result;
 }
 
 void Fraction::operator*=(const Fraction & f2)
@@ -62,23 +44,17 @@ void Fraction::operator*=(const Fraction & f2)
 
 Fraction operator/(const Fraction & f1, const Fraction & f2)
 {
-	return Fraction(f1.m_numerator*f2.m_deminator, f1.m_deminator*f2.m_numerator);
-}
-
-Fraction operator/(const Fraction & f1, int value)
-{
-	return Fraction(f1.m_numerator, f1.m_deminator*value);
-}
-
-Fraction operator/(int value, const Fraction & f2)
-{
-	return Fraction(value*f2.m_deminator, f2.m_numerator);
+		Fraction result(f1);
+		result /= f2;
+		result.reduction();
+		return result;
 }
 
 void Fraction::operator/=(const Fraction & f2)
 {
 	*this = Fraction(m_numerator*f2.m_deminator, m_deminator*f2.m_numerator);
 }
+
 bool operator==(const Fraction & f1, const Fraction & f2)
 {
 	return (f1.m_numerator == f2.m_numerator && f1.m_deminator == f2.m_deminator);
@@ -106,49 +82,55 @@ bool operator<(const Fraction & f1, const Fraction & f2)
 
 Fraction& Fraction::operator++()
 {
-	m_numerator += m_deminator;
-	return *this;
+	this->m_numerator += this->m_deminator;
+			reduction();
+			return *this;
 }
 
 Fraction& Fraction::operator--()
 {
-	m_numerator += m_deminator;
-	return *this;
+	this->m_numerator -= this->m_deminator;
+			reduction();
+			return *this;
 }
 
 Fraction Fraction::operator++(int)
 {
-	m_numerator += m_deminator;
-		return *this;
+	Fraction temp(this->m_numerator + this->m_deminator, this->m_deminator);
+			return temp;
 }
 
 Fraction Fraction::operator--(int)
 {
-	m_numerator -= m_deminator;
-	return *this;
-}
+	Fraction temp(this->m_numerator - this->m_deminator, this->m_deminator);
+				return temp;
+	}
 void Fraction::reduction()
 {
-	int nod = Fraction::nod(m_numerator, m_deminator);
+	int nod = std::__gcd(m_numerator, m_deminator);
 	m_numerator /= nod;
 	m_deminator /= nod;
 }
 
-void Fraction::print()
+std::ostream & operator<<(std::ostream & out, const Fraction &f)
 {
-	std::cout << m_numerator << "/" << m_deminator << std::endl;
+	out << f.m_numerator << "/" << f.m_deminator;
+	return out;
 }
-void Fraction::input()
+std::istream & operator>>(std::istream & in, Fraction &f)
 {
-	std::cin >> m_numerator;
+
+	in >> f.m_numerator;
 	std::cout << "/";
-	std::cin >> m_deminator;
-	std::cout << std::endl;
+	in >> f.m_deminator;
+
+	f.reduction();
+	return in;
 }
 
-double Fraction::toDouble()
-{
-	double result = static_cast <double> (m_numerator)/m_deminator;
-	return result;
-}
+
+Fraction::operator double() const {
+		return (double)m_numerator / m_deminator;
+	}
+
 

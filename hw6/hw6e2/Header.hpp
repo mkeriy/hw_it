@@ -1,41 +1,30 @@
 #pragma once
 class Fraction
 {
-	private:
-	int m_numerator;
-	int m_deminator;
-
 	public:
-	Fraction(int numerator, int deminator):
+	Fraction(int numerator = 0, int deminator = 1):
 		m_numerator(numerator), m_deminator(deminator)
 	{}
+	Fraction(int a):
+		m_numerator(a), m_deminator(1){}
+	Fraction():
+		m_numerator(0), m_deminator(1){}
+	Fraction(const Fraction& a) = default;
+	Fraction(const int& a) :
+		m_numerator(a), m_deminator(1){}
+
 	~Fraction(){}
 
-	static int nod(int a, int b)
-	{
-		return (b == 0) ? (a > 0 ? a : -a) : nod(b, a % b);
-	}
-	void reduction();
-	void print();
-	void input();
-	double toDouble();
-
 	friend Fraction operator+(const Fraction & f1, const Fraction & f2);
-	friend Fraction operator+(int value, const Fraction & f2);
-	friend Fraction operator+(const Fraction & f1, int value);
 	void operator+=(const Fraction & f2);
 	friend Fraction operator-(const Fraction & f1, const Fraction & f2);
-	friend Fraction operator-(const Fraction & f1, int value);
-	friend Fraction operator-(int value, const Fraction & f2);
 	void operator-=(const Fraction & f2);
 	friend Fraction operator*(const Fraction & f1, const Fraction & f2);
-	friend Fraction operator*(const Fraction & f1, int value);
-	friend Fraction operator*(int value, const Fraction & f2);
 	void operator*=(const Fraction & f2);
 	friend Fraction operator/(const Fraction & f1, const Fraction & f2);
-	friend Fraction operator/(const Fraction & f1, int value);
-	friend Fraction operator/(int value, const Fraction & f2);
 	void operator/=(const Fraction & f2);
+
+
 	friend bool operator==(const Fraction & f1, const Fraction & f2);
 	friend bool operator<=(const Fraction & f1, const Fraction & f2);
 	friend bool operator>=(const Fraction & f1, const Fraction & f2);
@@ -43,9 +32,18 @@ class Fraction
 	friend bool operator>(const Fraction & f1, const Fraction & f2);
 	friend bool operator<(const Fraction & f1, const Fraction & f2);
 
-    Fraction& operator++();
+
+	friend std::ostream & operator<<(std::ostream & out, const Fraction &f);
+	friend std::istream & operator>>(std::istream & in, Fraction &f);
+
+	Fraction& operator++();
     Fraction& operator--();
     Fraction operator++(int);
     Fraction operator--(int);
+    operator double() const;
 
+	private:
+		int m_numerator;
+		int m_deminator;
+		void reduction();
 };

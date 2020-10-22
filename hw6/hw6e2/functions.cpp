@@ -15,6 +15,7 @@ Fraction operator+(const Fraction &f1, const Fraction &f2)
 void Fraction::operator+=(const Fraction & f2)
 {
 	*this = Fraction(m_numerator * f2.m_deminator + f2.m_numerator * m_deminator, m_deminator * f2.m_deminator);
+	reduction();
 }
 
 Fraction operator-(const Fraction &f1, const Fraction &f2)
@@ -28,6 +29,7 @@ Fraction operator-(const Fraction &f1, const Fraction &f2)
 void Fraction::operator-=(const Fraction & f2)
 {
 	*this = Fraction(m_numerator*f2.m_deminator - f2.m_numerator*m_deminator, m_deminator*f2.m_deminator);
+	reduction();
 }
 Fraction operator*(const Fraction &f1, const Fraction &f2)
 {
@@ -53,6 +55,7 @@ Fraction operator/(const Fraction & f1, const Fraction & f2)
 void Fraction::operator/=(const Fraction & f2)
 {
 	*this = Fraction(m_numerator*f2.m_deminator, m_deminator*f2.m_numerator);
+	reduction();
 }
 
 bool operator==(const Fraction & f1, const Fraction & f2)
@@ -119,9 +122,9 @@ std::ostream & operator<<(std::ostream & out, const Fraction &f)
 }
 std::istream & operator>>(std::istream & in, Fraction &f)
 {
-
+	char c;
 	in >> f.m_numerator;
-	std::cout << "/";
+	in >> c;
 	in >> f.m_deminator;
 
 	f.reduction();

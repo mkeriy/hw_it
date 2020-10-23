@@ -12,7 +12,7 @@ class Figure
 	Figure(){}
 	virtual ~Figure() = default;
 
-	virtual void about();
+	virtual void about() = 0;
 	virtual double  area() const = 0;
 	virtual double perimeter() const = 0;
 

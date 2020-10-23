@@ -2,39 +2,42 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <math.h>
+#define _USE_MATH_DEFINES
+typedef std::vector<std::pair<double, double>> Points;
 
-class Figures
+class Figure
 {
 	public:
-	Figures(double a, double b):
-	m_param1(a), m_param2(b)
-	{}
-	virtual ~Figures(){}
+	Figure(){}
+	virtual ~Figure() = default;
 
 	virtual void about();
-	virtual double area();
-	virtual double perimeter();
+	virtual double  area() const = 0;
+	virtual double perimeter() const = 0;
 
 	protected:
-	double m_param1;
-	double m_param2;
-	std::vector<std::pair<double, double>> point;
-	const double pi = 3.141592653589793;
+	Points points;
 };
 
-class Ellipse : public Figures
+class Ellipse : public Figure
 {
 	public:
 	Ellipse(double a, double b):
-		Figures(a, b)
-		{}
-	virtual ~Ellipse(){}
-	virtual void about() override;
-	virtual double  area() override;
-	virtual double perimeter() override;
+		m_majSemiaxis(a), m_minSemiaxis(b)
+		{
+			points.push_back({0.0, 0.0});
+		}
+	virtual ~Ellipse() = default;
+	virtual void about();
 
 	protected:
 	void getCordin();
+	double m_majSemiaxis;
+	double m_minSemiaxis;
+	virtual double area() const;
+	virtual double perimeter() const;
+
 
 };
 
@@ -43,27 +46,35 @@ class Circle : public Ellipse
 	public:
 	Circle(double r):
 		Ellipse(r, r)
-	{}
-	virtual ~Circle(){}
+	{
+		points.push_back({0.0, 0.0});
+	}
+	virtual ~Circle() = default;
 
-	virtual void about() override;
+	virtual void about();
 };
 
-class Parallelogram : public Figures
+class Parallelogram : public Figure
 {
 	public:
 	Parallelogram(double a, double b, double hb):
-		Figures(a, b), m_hight(hb)
-	{}
+		m_sideA(a), m_sideB(b), m_hight(hb)
+	{
+		points.push_back({0.0, 0.0});
+		points.push_back({m_sideB, 0.0});
+		points.push_back({m_sideA*cos((M_PI/180)*angle()), m_hight});
+		points.push_back({m_sideA*cos((M_PI/180)*angle()) + m_sideB, m_hight});
+	}
 
-	virtual ~Parallelogram(){};
+	virtual ~Parallelogram() = default;
 
 	virtual void about();
-	virtual double  area() override;
-	virtual double perimeter() override;
+	virtual double  area() const override;
+	virtual double perimeter() const override;
 	double angle();
 	protected:
-		void getCordin();
+		double m_sideA;
+		double m_sideB;
 		double m_hight;
 };
 
@@ -72,9 +83,14 @@ class Rhombus : public Parallelogram
 	public:
 	Rhombus(double a, double h):
 		Parallelogram(a, a, h)
-	{}
-	virtual ~Rhombus(){}
-	virtual void about() override;
+	{
+		points.push_back({0.0, 0.0});
+		points.push_back({m_sideB, 0.0});
+		points.push_back({m_sideA*cos((M_PI/180)*angle()), m_hight});
+		points.push_back({m_sideA*cos((M_PI/180)*angle()) + m_sideB, m_hight});
+	}
+	virtual ~Rhombus() = default;
+	virtual void about();
 
 };
 
@@ -82,11 +98,16 @@ class Rectangle: public Parallelogram
 {
 	public:
 		Rectangle(double a, double b):
-			Parallelogram(b, a, b)
-	{}
-		virtual ~Rectangle(){}
+			Parallelogram(a, b, a)
+	{
+			points.push_back({0.0, 0.0});
+			points.push_back({m_sideB, 0.0});
+     		points.push_back({0.0, m_sideA});
+			points.push_back({m_sideB, m_sideA});
+	}
+		virtual ~Rectangle() = default;
 
-		virtual void about() override;
+		virtual void about();
 };
 
 class Square: public Rectangle
@@ -94,9 +115,14 @@ class Square: public Rectangle
 	public:
 	Square(double a):
 	Rectangle(a, a)
-	{}
-	virtual ~Square(){}
-	virtual void about() override;
+	{
+		points.push_back({0.0, 0.0});
+	points.push_back({m_sideA, 0.0});
+	points.push_back({m_sideA, m_sideA});
+	points.push_back({m_sideA, m_sideA});
+	}
+	virtual ~Square() = default;
+	virtual void about();
 };
 
 

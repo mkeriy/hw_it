@@ -1,99 +1,72 @@
 #include "Figures.hpp"
-#include <cmath>
 
 
-void Figures::about()
-{
-	std::cout << "FIGURES" << std::endl;
-}
-double Figures::area()
-{
-	return 0;
-}
 
-double Figures::perimeter()
-{
-	return 0;
-}
+
 void Ellipse::about()
 {
 	std::cout << "Ellipse." << std::endl;
-	std::cout << "semi-major axis: " << m_param1 << std::endl;
-	std::cout << "minor semiaxis: " << m_param2 << std::endl;
+	std::cout << "major semi-axis: " << m_majSemiaxis << std::endl;
+	std::cout << "minor semi-axis: " << m_minSemiaxis << std::endl;
 	std::cout << "Area:" << area() << "  Perimeter: " << perimeter()
 			  << std::endl;
 	std::cout << "Cordinates: ";
-	getCordin();
-	for (const auto& f : point) {
+
+	for (const auto& f : points) {
 				std::cout << "(" << std::get<0>(f) << "; " << std::get<1>(f) << "), ";
 			}
 	std::cout << std::endl;
 }
-double Ellipse::area()
+double Ellipse::area() const
 {
-	return pi*m_param1*m_param2;
+	return M_PI*m_majSemiaxis*m_minSemiaxis;
 }
 
-double Ellipse::perimeter()
+double Ellipse::perimeter() const
 {
-	return 4*(pi*m_param1*m_param2 + (m_param1 - m_param2))/(m_param1 + m_param2);
-}
-
-void Ellipse::getCordin()
-{
-	point.push_back({0.0, 0.0});
-	point.push_back({0.0, m_param2});
-	point.push_back({m_param1, 0.0});
-	point.push_back({0.0, -m_param2});
-	point.push_back({-m_param1, 0.0});
+	return 4*(M_PI*m_majSemiaxis*m_minSemiaxis + (m_majSemiaxis - m_minSemiaxis))/(m_majSemiaxis + m_minSemiaxis);
 }
 
 void Circle::about()
 {
 	std::cout << "Circle." << std::endl;
-	std::cout << "Radius " << m_param1 << std::endl;
+	std::cout << "Radius " << m_majSemiaxis << std::endl;
 
 	std::cout << "Area:" << area() << "  Perimeter: " << perimeter()
 			  << std::endl;
 	std::cout << "Cordinates: ";
-	getCordin();
-	for (const auto& f : point) {
+
+	for (const auto& f : points) {
 				std::cout << "(" << std::get<0>(f) << "; " << std::get<1>(f) << "), ";
 			}
 	std::cout << std::endl;
 }
 
-double Parallelogram::area()
+double Parallelogram::area() const
 {
-	return m_hight*m_param2;
+	return m_hight*m_sideB;
 }
 
-double Parallelogram::perimeter()
+double Parallelogram::perimeter() const
 {
-	return 2*(m_param2 + m_param1);
+	return 2*(m_sideA + m_sideB);
 }
 double Parallelogram::angle()
 {
-	return  asin(m_hight/m_param1) * (180 / pi);
+	return  asin(m_hight/m_sideA) * (180 / M_PI);
 }
-void Parallelogram::getCordin()
-{
-	point.push_back({0.0, 0.0});
-	point.push_back({0.0, m_param2});
-	point.push_back({m_param1*cos((pi/180)*angle()), m_hight});
-	point.push_back({m_param1*cos((pi/180)*angle()) + m_param2, m_hight});
-}
+
 void Parallelogram::about()
 {
 	std::cout << "Parallelogram." << std::endl;
-	std::cout << "Sides of a parallelogram: " << m_param1 << " and " << m_param2 << std::endl;
+	std::cout << "Sides of a parallelogram: " << m_sideA << " and " << m_sideB << std::endl;
 	std::cout << "Parallelogram height: " << m_hight << std::endl;
 	std::cout << "Parallelogram angles: " << angle() << " and " << 180 - angle() << std::endl;
 	std::cout << "Area:" << area() << "  Perimeter: " << perimeter()
 			  << std::endl;
 	std::cout << "Cordinates: ";
-	getCordin();
-	for (const auto& f : point) {
+
+	for (const auto& f : points) {
 				std::cout << "(" << std::get<0>(f) << "; " << std::get<1>(f) << "), ";
 			}
 	std::cout << std::endl;
@@ -102,14 +75,13 @@ void Parallelogram::about()
 void Rhombus::about()
 {
 	std::cout << "Rhombus." << std::endl;
-	std::cout << "Sides of a Rhombus: " << m_param1 << std::endl;
+	std::cout << "Sides of a Rhombus: " << m_sideA << std::endl;
 	std::cout << "Rhombus height: " << m_hight << std::endl;
 	std::cout << "Rhombus angles: " << angle() << " and " << 180 - angle() << std::endl;
 	std::cout << "Area:" << area() << "  Perimeter: " << perimeter()
 			  << std::endl;
 	std::cout << "Cordinates: ";
-	getCordin();
-	for (const auto& f : point) {
+	for (const auto& f : points) {
 				std::cout << "(" << std::get<0>(f) << "; " << std::get<1>(f) << "), ";
 			}
 	std::cout << std::endl;
@@ -118,12 +90,12 @@ void Rhombus::about()
 void Rectangle::about()
 {
 	std::cout << "Rectangle." << std::endl;
-	std::cout << "Sides of a Rectangle: " << m_param1 << " and " << m_param2 << std::endl;
+	std::cout << "Sides of a Rectangle: " << m_sideA << " and " << m_sideB << std::endl;
 	std::cout << "Area:" << area() << "  Perimeter: " << perimeter()
 			  << std::endl;
 	std::cout << "Cordinates: ";
-	getCordin();
-	for (const auto& f : point) {
+
+	for (const auto& f : points) {
 				std::cout << "(" << std::get<0>(f) << "; " << std::get<1>(f) << "), ";
 			}
 	std::cout << std::endl;
@@ -132,12 +104,12 @@ void Rectangle::about()
 void Square::about()
 {
 	std::cout << "Square." << std::endl;
-	std::cout << "Sides of a Square: " << m_param1 << std::endl;
+	std::cout << "Sides of a Square: " << m_sideA << std::endl;
 	std::cout << "Area:" << area() << "  Perimeter: " << perimeter()
 			  << std::endl;
 	std::cout << "Cordinates: ";
-	getCordin();
-	for (const auto& f : point) {
+
+	for (const auto& f : points) {
 				std::cout << "(" << std::get<0>(f) << "; " << std::get<1>(f) << "), ";
 			}
 	std::cout << std::endl;

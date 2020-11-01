@@ -18,7 +18,7 @@ int main()
 	}
 
 
-
+	delete f;
 	
 
 	return 0;

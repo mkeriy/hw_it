@@ -19,15 +19,13 @@ int main()
 
     }
 
-    ::merge_sort(sequence, size, [] (double i, double j) { return i < j; });
+    ::merge_sort(sequence, size, [] (double i, double j) { return i > j; });
     ::merge_sort_(sequence_static);
 
     std::cout << "Sorted sequence." << std::endl;
     for (auto i = 0; i < size; i++)
     {
         std::cout << sequence[i] << ' ';
-        std::cout << std::endl;
-       
     }
 
     delete[] sequence;

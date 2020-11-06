@@ -4,8 +4,8 @@
 #include <vector>
 #include <functional>
 
-template <typename T, typename T1, typename FUNC = std::function<bool(const T& lhs, const T& rhs)>>
-void merge_sort(T * array, T1 size, FUNC f = [](const T& lhs, const T& rhs) {return lhs > rhs; })
+template <typename T, typename FUNC>
+void merge_sort(T * array, std::size_t size, FUNC f = [](const T& lhs, const T& rhs) {return lhs > rhs; })
 {
     if (size != 0)
     {
@@ -18,8 +18,8 @@ void merge_sort(T * array, T1 size, FUNC f = [](const T& lhs, const T& rhs) {ret
     }
 }
   
-template <typename T, typename T1, typename T2, typename FUNC>
-void merge(T * array, T1 size, T2 left, T2 right, FUNC f)
+template <typename T,  typename FUNC>
+void merge(T * array, std::size_t size, std::size_t left, std::size_t right, FUNC f)
 {
     if (left < right)
     {
@@ -27,9 +27,9 @@ void merge(T * array, T1 size, T2 left, T2 right, FUNC f)
         ::merge(array, size, left + (right - left) / 2 + 1, right, f);
     }
    
-    int middle = left + (right - left) / 2;
-    int first = left;
-    int last = middle + 1;
+    auto middle = left + (right - left) / 2;
+    auto first = left;
+    auto last = middle + 1;
 
 
     std::vector <T> v1(size);
@@ -50,18 +50,28 @@ void merge(T * array, T1 size, T2 left, T2 right, FUNC f)
     
  
 
-    for (int j = left; j <= right; j++)
+    for (auto j = left; j <= right; j++)
     {
         array[j] = v1[j];
     }
 }
 
-template <typename T, int size >
+template <typename T, std::size_t size>
 void merge_sort_(T (&array) [size])
 {
     if (size != 0)
     {
-        ::merge_(array, 0, size - 1);
+        T* newArray = new T[size];
+        for (auto i = 0; i < size; ++i)
+        {
+            newArray[i] = array[i];
+        }
+        ::merge(newArray, size, 0, size - 1, [](const T& lhs, const T& rhs) {return lhs > rhs; });
+        for(auto i = 0; i < size; ++i)
+        {
+            array[i] = newArray[i];
+        }
+        delete[] newArray;
     }
     else
     {
@@ -70,42 +80,9 @@ void merge_sort_(T (&array) [size])
     }
 }
 
-template <typename T, int size, typename T2>
-void merge_(T (&array) [size], T2 left, T2 right)
-{
-    if (left < right)
-    {
-        ::merge_(array, left, left + (right - left) / 2);
-        ::merge_(array, left + (right - left) / 2 + 1, right);
-    }
-
-    int middle = left + (right - left) / 2;
-    int first = left;
-    int last = middle + 1;
-
-
-    std::vector <T> v1(size);
-
-    for (int j = left; j <= right; j++)
-    {
-        if ((first <= middle) && ((last > right) || (array[first] < array[last])))
-        {
-            v1[j] = array[first];
-            ++first;
-        }
-        else
-        {
-            v1[j] = array[last];
-            ++last;
-        }
-    }
 
 
 
-    for (int j = left; j <= right; j++)
-    {
-        array[j] = v1[j];
-    }
-}
 
+   
 

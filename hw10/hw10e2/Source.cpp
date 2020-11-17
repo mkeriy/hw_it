@@ -3,7 +3,7 @@
 
 
 template <typename ... T>
-T* func(T arg ...)
+T* func(T ... args)
 {
 	return new T(arg...);
 }

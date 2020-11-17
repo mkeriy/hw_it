@@ -2,10 +2,10 @@
 #include <vector>
 
 
-template <typename T>
-T* func(T arg)
+template <typename ... T>
+T* func(T arg ...)
 {
-	return new T(arg);
+	return new T(arg...);
 }
 
 int main()

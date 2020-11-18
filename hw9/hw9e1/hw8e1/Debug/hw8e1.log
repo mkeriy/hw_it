@@ -1,0 +1,16 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: промежуточный каталог (Debug\) содержит файлы, которые используются совместно с другим проектом (hw8e1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  main.cpp
+D:\hw_it\hw9\hw9e1\hw8e1\MergeSort.hpp(37,26): warning C4018: <=: несоответствие типов со знаком и без знака
+D:\hw_it\hw9\hw9e1\hw8e1\MergeSort.hpp(12): message : выполняется компиляция ссылки на экземпляр шаблон функции "void merge<T,FUNC>(T *,size_t,size_t,size_t,FUNC)"
+          with
+          [
+              T=double,
+              FUNC=main::<lambda_d9939fd97bc586a9daeb777b156226ff>
+          ]
+D:\hw_it\hw9\hw9e1\hw8e1\main.cpp(22): message : выполняется компиляция ссылки на экземпляр шаблон функции "void merge_sort<double,main::<lambda_d9939fd97bc586a9daeb777b156226ff>>(T *,size_t,FUNC)"
+          with
+          [
+              T=double,
+              FUNC=main::<lambda_d9939fd97bc586a9daeb777b156226ff>
+          ]
+  hw8e1.vcxproj -> D:\hw_it\hw9\hw9e1\Debug\hw9e1.exe

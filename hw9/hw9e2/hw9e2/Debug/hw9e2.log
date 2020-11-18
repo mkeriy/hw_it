@@ -1,0 +1,28 @@
+﻿  main.cpp
+D:\hw_it\hw9\hw9e2\hw9e2\Container.hpp(155,2): warning C4018: <: несоответствие типов со знаком и без знака
+D:\hw_it\hw9\hw9e2\hw9e2\Container.hpp(154): message : во время компиляции функции-члена класс шаблон "void blr::victor<double>::print(void)"
+D:\hw_it\hw9\hw9e2\hw9e2\main.cpp(16): message : выполняется компиляция ссылки на экземпляр шаблон функции "void blr::victor<double>::print(void)"
+D:\hw_it\hw9\hw9e2\hw9e2\main.cpp(5): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "blr::victor<double>"
+D:\hw_it\hw9\hw9e2\hw9e2\Container.hpp(101,2): warning C4018: <: несоответствие типов со знаком и без знака
+D:\hw_it\hw9\hw9e2\hw9e2\Container.hpp(98): message : во время компиляции функции-члена класс шаблон "void blr::victor<double>::insert(T,size_t)"
+          with
+          [
+              T=double
+          ]
+D:\hw_it\hw9\hw9e2\hw9e2\main.cpp(15): message : выполняется компиляция ссылки на экземпляр шаблон функции "void blr::victor<double>::insert(T,size_t)"
+          with
+          [
+              T=double
+          ]
+D:\hw_it\hw9\hw9e2\hw9e2\Container.hpp(37,2): warning C4018: <: несоответствие типов со знаком и без знака
+D:\hw_it\hw9\hw9e2\hw9e2\Container.hpp(30): message : во время компиляции функции-члена класс шаблон "blr::victor<double>::victor(size_t,T)"
+          with
+          [
+              T=double
+          ]
+D:\hw_it\hw9\hw9e2\hw9e2\main.cpp(5): message : выполняется компиляция ссылки на экземпляр шаблон функции "blr::victor<double>::victor(size_t,T)"
+          with
+          [
+              T=double
+          ]
+  hw9e2.vcxproj -> D:\hw_it\hw9\hw9e2\Debug\hw9e2.exe

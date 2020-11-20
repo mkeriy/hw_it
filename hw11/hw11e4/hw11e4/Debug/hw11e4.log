@@ -1,0 +1,9 @@
+﻿  Source.cpp
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(13,1): warning C4346: enable_if<C,T>::type: зависимое имя не является типом
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(13,1): message : укажите префикс "typename" для задания типа
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(13,1): error C2061: синтаксическая ошибка: идентификатор "type"
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(16,9): error C2143: синтаксическая ошибка: отсутствие ";" перед "{"
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(16,9): error C2447: {: отсутствует заголовок функции (возможно, используется формальный список старого типа)
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(23,48): error C3861: f: идентификатор не найден
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(23,48): error C2065: f: необъявленный идентификатор
+D:\hw_it\hw_it\hw11\hw11e4\hw11e4\Source.cpp(23,56): error C2993: "unknown-type": не является допустимым типом для параметра шаблона "_Test", не являющегося типом.

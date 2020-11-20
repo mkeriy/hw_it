@@ -1,10 +1,12 @@
 #include <iostream>
 
+template<typename T>
+using constant_type = const T;
 
 template <typename T>
 struct add_const 
 {
-	using tp = const T;
+	using tp = constant_type<T>;
 };
 
 
@@ -15,15 +17,12 @@ struct remove_const
 };
 
 template <typename T>
-struct remove_const<const T>
+struct remove_const<constant_type<T>>
 {
 	using tp = T;
 };
-template<typename T>
-void f(T ard)
-{
-	std::cout << ++ard;
-}
+
+
 
 int main()
 {	

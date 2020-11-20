@@ -2,59 +2,24 @@
 #include <vector>
 
 
-
-//начальный шаблон
-template<typename T>
-struct decay	
-{
-	using type = T;
+template <typename T>
+struct decay 
+{ 
+	using T1 = std::remove_reference_t<T>;
+	using T2 = typename std::_Select<std::is_function_v<T1>>::template _Apply<std::add_pointer<T1>, std::remove_cv<T1>>;
+	using type = typename std::_Select<std::is_array_v<T1>>::template _Apply<std::add_pointer<std::remove_extent_t<T1>>, T2>::type;
 };
 
-//перегрузка для различных ссылок
-template<typename T>
-struct decay<T&>
-{
-	using type = T;
-};
+template <typename T>
+using decay_t = typename decay<T>::type;
 
-template<typename T>
-struct decay<T&&>
-{
-	using type = T;
-};
 
-//перегрузка для константных ссылок
-template<typename T>
-struct decay<const T&>
-{
-	using type = T;
-};
-
-template<typename T>
-struct decay<const T&&>
-{
-	using type = T;
-};
-
-//перегрузка для функций
-template<typename T, typename ... Types>
-struct decay<T(Types ...)>
-{
-	using type = T*;
-};
-
-//перегрузка для массивов
-template<typename T, std::size_t i>
-struct decay<T[i]>
-{
-	using type = T*;
-};
-void f(int z, double y, char x) { }
+int f() { return 0;  }
 
 int main()
 {
 	int a[1];
-	std::cout << std::is_same<decay<decltype(f)>::type, void*>::value;
+	std::cout << std::is_same<decay<decltype(f)>::type, int*>::value;
 	std::cout << std::is_same<decay<decltype(a)>::type, int*>::value;
 	std::cout << std::is_same<decay<const int&>::type, int>::value;
 	std::cout << std::is_same<decay<int&&>::type, int>::value;

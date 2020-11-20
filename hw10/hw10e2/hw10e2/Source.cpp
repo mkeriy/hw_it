@@ -2,16 +2,16 @@
 #include <vector>
 
 
-template <typename T>
-T* func(T arg)
+template <typename ... Types>
+auto* func(Types... t)
 {
-	return new T(arg);
+	return new auto(t ...);
 }
 
 int main()
 {
 	double* ex = func(1.0);
 	std::cout << ex << std::endl;
-
+	delete ex;
 	return 0;
 }

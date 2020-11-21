@@ -9,6 +9,8 @@ struct add_const
 	using tp = constant_type<T>;
 };
 
+template <typename T>
+using add_const_t = add_const<T>::tp;
 
 template <typename T>
 struct remove_const
@@ -22,6 +24,8 @@ struct remove_const<constant_type<T>>
 	using tp = T;
 };
 
+template <typename T>
+using remove_const_t = remove_const<T>::tp;
 
 
 int main()

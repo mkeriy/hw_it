@@ -10,7 +10,7 @@ template <typename T>
 struct decay 
 { 
 	using T1 = std::remove_reference_t<T>;
-	using type = typename std::conditional_t<is_array_v<T>, std::add_pointer_t<std::remove_extent_t<T1>>,
+	using type = std::conditional_t<is_array_v<T>, std::add_pointer_t<std::remove_extent_t<T1>>,
 		std::conditional_t<is_function_v<T>, std::add_pointer_t<T1>, std::remove_const_t<T1>>>;
 	
 

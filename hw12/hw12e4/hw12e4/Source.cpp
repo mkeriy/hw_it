@@ -1,6 +1,7 @@
 #include <iostream>
 #include <array>
 
+
 constexpr int prime_number(int n)
 {
     int i = 1;
@@ -86,8 +87,6 @@ constexpr int prime()
 
 int main()
 {
-    constexpr std::size_t N = 10;
-    std::cout << std::endl;
     std::cout << prime_number(10) << std::endl;
     std::cout << prime<2000>() << std::endl;
 	return 0;

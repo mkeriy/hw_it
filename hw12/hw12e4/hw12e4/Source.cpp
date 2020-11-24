@@ -47,39 +47,25 @@ template <int n>
 constexpr int prime()
 {
     std::array<int, n> a = { 2 }; 
-
-    bool f = true;
-    int r = 0;
-
- 
-   
-     
-     
-
+  
      for (auto i = 3, j = 1; j < n ; ++i, ++j)
      {
          for (auto k = 0; k < n; ++k)
          {
-                 if (a[k] != 0 && i % a[k] != 0)
-                 {
-                     a[j] = i;
-
-                 }
+             if (a[k] != 0 && i% a[k] != 0)
+             {
+                 a[j] = i;
+             }
                  else
                  {
-                     r = k;
-                     f = false;
+                 if (j > k)
+                 {
+                     --j;
+                    }
                      break;
                  }
-
-
          }
-
-         if (f == false && j > r)
-         {
-             --j;
-         }
-
+       
      }
      
          return a[n-1];
@@ -88,6 +74,6 @@ constexpr int prime()
 int main()
 {
     std::cout << prime_number(10) << std::endl;
-    std::cout << prime<2000>() << std::endl;
+    std::cout << prime<10>() << std::endl;
 	return 0;
 }

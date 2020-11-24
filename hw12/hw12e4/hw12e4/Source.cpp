@@ -2,46 +2,7 @@
 #include <array>
 
 
-constexpr int prime_number(int n)
-{
-    int i = 1;
-    int j = 1;
-    int ind = 1;
-    bool a[100] = { true };
 
-    int b[100] = { 2 };
-
-    for (i = 1; i < 100; ++i)
-    {
-        a[i] = true;
-    }
-
-    for (i = 1; 2 * i * (i + 1) < 100; ++i)
-    {
-        for (j = i; ind = 2 * i * j + i + j, ind < 100; ++j)
-        {
-            a[ind] = false;
-        }
-    }
-    
-    for (i = 1, j = 1; i < 100; ++i)
-    {
-
-            if (a[i])
-            {
-
-
-                b[j] = 2 * i + 1;
-                ++j;
-                
-            }  
-    }
-
-
-
-
-    return b[n-1];
-}
 
 template <int n>
 constexpr int prime()
@@ -73,7 +34,6 @@ constexpr int prime()
 
 int main()
 {
-    std::cout << prime_number(10) << std::endl;
     std::cout << prime<10>() << std::endl;
 	return 0;
 }
